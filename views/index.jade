@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= "Simple Chat"
+	div#chat
+		-for (var i in items)
+			p= items[i].message
+
+	form#message(name="message",method="post",action="/message")
+		input#message(type="text",placeholder="chat",name="message")
+		button#submit(type="submit") submit
