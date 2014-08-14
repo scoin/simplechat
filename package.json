@@ -6,14 +6,17 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "connect": "^2.25.5",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
+    "express": "~4.2.0",
+    "express-session": "^1.7.5",
     "jade": "~1.3.0",
-    "mongodb":"*",
-    "mongoose":"*"
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "~1.0.0",
+    "session-mongoose": "^0.5.1",
+    "static-favicon": "~1.0.0"
   }
 }

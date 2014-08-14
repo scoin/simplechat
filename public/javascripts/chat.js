@@ -6,7 +6,13 @@ function chatWindow(){
 		})
 }
 
+function clearMsg(){
+	$('#msg').val('');
+}
+
 $(document).ready(function(){
+
+	chatWindow();
 
 	var timer = setInterval(chatWindow, 2000);
 
@@ -16,6 +22,7 @@ $(document).ready(function(){
 			type: "POST",
 			url: '/message',
 			data: $('#message').serialize(),
+			success: clearMsg()
 		}).done(function(data){
 			console.log(data);
 		})

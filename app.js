@@ -1,18 +1,20 @@
 var express = require('express');
+var app = express();
+
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/simplechat')
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, "connection error"));
-var Chat = require('./models/chat')
+var Chat = require('./models/chat');
+var MongoSessionStore = require('session-mongoose')(require('connect'));
+var sessionStore = new MongoSessionStore();
+var cookieParser = require('cookie-parser');
+app.use(require('express-session')({ store: sessionStore, secret: "lol" }));
 var routes = require('./routes/index');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,10 +27,10 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
+// app.use(function(req,res,next){
+//     req.db = db;
+//     next();
+// });
 
 app.use('/', routes);
 
@@ -64,4 +66,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports.app = app;
+module.exports.db = db;
