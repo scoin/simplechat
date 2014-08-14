@@ -9,13 +9,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/simplechat')
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, "connection error"));
-var chatSchema = mongoose.Schema({
-    username: String,
-    message: String
-});
-
-Chat = mongoose.model('Chat', chatSchema);
-
+var Chat = require('./models/chat')
 var routes = require('./routes/index');
 
 var app = express();
