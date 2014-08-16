@@ -4,10 +4,12 @@ function chatWindow(){
 		.done(function(data){
 			$.each(data, function(i, chat){
 				$('#chat').append("<p>" + chat.username + " : " + chat.message + "</p>");
-				date = {id: chat._id}
 			})
+			if(data.length > 0){
+				var last = data[data.length - 1];
+				date = {id: last._id}
+			}
 			$('#chat').scrollTop($('#chat').prop("scrollHeight"));
-			console.log(data);
 		}, 'json')
 }
 
