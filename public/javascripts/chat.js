@@ -1,11 +1,13 @@
-var date = {id: 0};
+var date = {id: '00000000786833b147b2c8e3'};
 function chatWindow(){
 	$.get('/chats', date)
 		.done(function(data){
 			$.each(data, function(i, chat){
 				$('#chat').append("<p>" + chat.username + " : " + chat.message + "</p>");
+				date = {id: chat._id}
 			})
 			$('#chat').scrollTop($('#chat').prop("scrollHeight"));
+			console.log(data);
 		}, 'json')
 }
 

@@ -20,8 +20,10 @@ router.post('/message', function(req, res){
 });
 
 router.get('/chats', function(req, res) {
-	date = req.query.date;
-	Chat.find({}, function(err, docs){
+	date = req.query.id;
+	console.log(date);
+	chat = Chat.where('_id').gt(mongoose.Types.ObjectId(date));
+	chat.exec(function(err, docs){
 		if(err){ console.log('error'); }
 		res.json(docs);
 	})
