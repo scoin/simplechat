@@ -1,9 +1,12 @@
+var date = {id: 0};
 function chatWindow(){
-	$.get('/chats')
+	$.get('/chats', date)
 		.done(function(data){
-			$('#chat').html(data);
+			$.each(data, function(i, chat){
+				$('#chat').append("<p>" + chat.username + " : " + chat.message + "</p>");
+			})
 			$('#chat').scrollTop($('#chat').prop("scrollHeight"));
-		})
+		}, 'json')
 }
 
 function clearMsg(){
@@ -14,7 +17,7 @@ $(document).ready(function(){
 
 	chatWindow();
 
-	var timer = setInterval(chatWindow, 2000);
+	var timer = setInterval(chatWindow, 2500);
 
 	$('#message').submit(function(e){
 		e.preventDefault();
